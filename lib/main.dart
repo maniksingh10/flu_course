@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'UI/dHome.dart';
+import './UI/dHome.dart';
+
 void main() {
-  runApp(MainApp());
+  runApp(MyApp());
 }
 
-class MainApp extends StatelessWidget {
+class MyApp extends StatelessWidget{
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "fSca",
-      home: Home(),
-    );
-  }
+    Widget build(BuildContext context) {
+      // TODO: implement build
+      return MaterialApp(
+        title: "fLogin",
+        home: Home(),
+      );
+    }
 }
-
-
