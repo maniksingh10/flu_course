@@ -57,7 +57,8 @@ class MyAppBodyState extends State<MyAppBody> {
                         fontWeight: FontWeight.w600),
                     controller: _userController,
                     decoration: InputDecoration(
-                      hintText: "Your Name",
+                      
+                      labelText: "Username",
                       icon: Icon(Icons.person_add),
                       contentPadding: EdgeInsets.symmetric(vertical: 3.0),
                     ),
@@ -73,13 +74,14 @@ class MyAppBodyState extends State<MyAppBody> {
                     obscureText: true,
                     controller: _passController,
                     decoration: InputDecoration(
-                        hintText: "Your Password",
+                        
+                        labelText: "Password",
                         icon: Icon(Icons.lock),
                         contentPadding: EdgeInsets.symmetric(vertical: 3.0)),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(14.0),
                 ),
                 Center(
                   child: Row(
