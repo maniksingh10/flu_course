@@ -56,7 +56,7 @@ class BodyState extends State<Body> {
               decoration: InputDecoration(
                 labelText: "Your weight on Earth",
                 hintText: "In Kilograms",
-                icon: Icon(Icons.bala),
+                icon: Icon(Icons.line_weight),
                 contentPadding: EdgeInsets.symmetric(vertical: 3.0),
               ),
             ),
