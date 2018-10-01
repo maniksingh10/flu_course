@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import './UI/dHome.dart';
-void main() {}
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -9,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Planets",
       home: Home(),
-
+      theme: ThemeData(primarySwatch: Colors.purple),
     );
   }
   
