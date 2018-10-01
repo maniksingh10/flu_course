@@ -26,7 +26,7 @@ class Home extends StatelessWidget {
         onPressed: () => debugPrint("FAB Tapped"),
         tooltip: "FAB",
       ),
-      body: MyBody(),
+      body: CustomButton(),
       backgroundColor: Colors.greenAccent.shade50,
       bottomNavigationBar: BottomNavigationBar(
         items: [

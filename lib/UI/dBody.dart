@@ -1,8 +1,27 @@
 import 'package:flutter/material.dart';
 
-class MyBody extends StatelessWidget {
+class CustomButton extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return CustomButtonState();
+  }
+}
+
+class CustomButtonState extends State<CustomButton> {
+  int _a = 0;
+  Color color = Colors.greenAccent;
+  void add() {
+    setState(() {
+      _a += 1000;
+
+      color = _a > 10000 ? Colors.redAccent : Colors.greenAccent;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -10,53 +29,24 @@ class MyBody extends StatelessWidget {
           Container(
               margin: EdgeInsets.all(16.0),
               child: Text(
-                "This is the Body 1",
-                style: TextStyle(color: Colors.black, fontSize: 40.0),
+                '\$$_a',
+                style: TextStyle(
+                    color: color, fontSize: 40.0, fontWeight: FontWeight.w800),
               )),
           Container(
-              margin: EdgeInsets.all(16.0),
-              child: Text(
-                "This is the Body 2",
-                style: TextStyle(color: Colors.black, fontSize: 40.0),
-              )),
-          Container(
-              margin: EdgeInsets.all(16.0),
-              child: Text(
-                "This is the Body 3",
-                style: TextStyle(color: Colors.black, fontSize: 40.0),
-              )),
-          Container(margin: EdgeInsets.all(16.0), child: CustomButton()),
+            margin: EdgeInsets.all(16.0),
+            child: RaisedButton(
+              onPressed: add,
+              child: Text("Button"),
+              animationDuration: Duration(seconds: 2),
+              color: color,
+              highlightColor: Colors.greenAccent,
+              elevation: 5.0,
+            ),
+          )
         ],
       ),
     );
   }
 }
 
-class CustomButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        final snackbar = SnackBar(
-          content: Text("Button Press"),
-          backgroundColor: Colors.greenAccent.shade400,
-          duration: Duration(seconds: 2),
-        );
-        Scaffold.of(context).showSnackBar(snackbar);
-      },
-      child: Container(
-        padding: EdgeInsets.all(20.0),
-        decoration: BoxDecoration(
-            color: Colors.greenAccent.shade200,
-            borderRadius: BorderRadius.circular(8.0),
-            boxShadow: [
-              BoxShadow(blurRadius: 10.0, color: Colors.purple)
-            ]),
-        child: Text(
-          "Press Button",
-          style: TextStyle(fontWeight: FontWeight.w700),
-        ),
-      ),
-    );
-  }
-}
