@@ -7,9 +7,10 @@ import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 List _quakesData;
+
 void main() async {
   Map _allData = await getQuakesData();
-  _quakesData = _allData["features"];
+   _quakesData = _allData["features"];
 
   runApp(MaterialApp(
     title: "Quakes",
@@ -21,7 +22,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+       appBar: AppBar(
         title: Text("EarthQuakes"),
         backgroundColor: Colors.red,
       ),
@@ -32,6 +33,7 @@ class HomeScreen extends StatelessWidget {
           var date = format.format(new DateTime.fromMillisecondsSinceEpoch(
               _quakesData[position]["properties"]["time"],
               isUtc: true));
+        
 
           return Column(
             children: <Widget>[
@@ -53,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 leading: CircleAvatar(
                   maxRadius: 25.0,
-                  backgroundColor: Colors.redAccent,
+                  backgroundColor: _circleColor(_quakesData[position]["properties"]["mag"].toString()),
                   child: Text(
                     "${_quakesData[position]["properties"]["mag"]}",
                     style: TextStyle(
@@ -109,6 +111,17 @@ _launchURL(String a) async {
     throw 'Could not launch $url';
   }
 }
+  
+Color _circleColor(String mag) {
+  double magint = double.parse(mag);
+  if(magint>7.0){
+    return Colors.red.shade700;
+  }else if(magint>4.0 && magint<7.0){
+    return Colors.yellow.shade600;
+  }else{
+    return Colors.greenAccent;
+  }
+}
 
 Future<Map> getQuakesData() async {
   String url =
@@ -116,3 +129,5 @@ Future<Map> getQuakesData() async {
   http.Response responsee = await http.get(url);
   return json.decode(responsee.body);
 }
+
+
