@@ -1,2 +1,2 @@
 final api_id = "";
-final city="New+Delhi";
+final default_city="New Delhi";
