@@ -22,6 +22,7 @@ dependencies:
   intl: ^0.15.7
   url_launcher: ^4.0.0
   http: ^0.12.0
+  path_provider: ^0.4.1
 
 
 dev_dependencies:
@@ -42,10 +43,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   
-  assets:
+#  assets:
 
-    - images/indiagate.jpg
-    - images/delhi.jpg
+  #  - images/indiagate.jpg
+  #  - images/delhi.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
