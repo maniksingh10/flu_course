@@ -1,11 +1,11 @@
 import 'dart:io';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 void main() async {
   runApp(MaterialApp(
-    title: "Peristence_Data",
+    title: "Shared_Pref",
     home: Peristence_App(),
   ));
 }
@@ -17,6 +17,29 @@ class Peristence_App extends StatefulWidget {
 
 class _Peristence_AppState extends State<Peristence_App> {
   var _entereddata = TextEditingController();
+  String _savedData = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSPdata();
+  }
+
+  _loadSPdata() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      if (preferences.getString("data_key") != null&&preferences.getString("data_key").isNotEmpty) {
+        _savedData = preferences.getString("data_key");
+      }else{
+        _savedData = "";
+      }
+    });
+  }
+
+  _saveData(String msg) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("data_key", msg);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,53 +62,17 @@ class _Peristence_AppState extends State<Peristence_App> {
             ),
             FlatButton(
               onPressed: () {
-                writeData(_entereddata.text.toString());
+                _saveData(_entereddata.text.toString());
               },
               child: Text("Save"),
             ),
             Padding(
               padding: EdgeInsets.all(15.0),
             ),
-            FutureBuilder(
-              future: readData(),
-              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                if (snapshot != null && snapshot.hasData) {
-                  return Container(
-                      child: Text("${snapshot.data.toString()}",
-                          textAlign: TextAlign.center));
-                } else {
-                  return Container(width: 0.0, height: 0.0);
-                }
-              },
-            )
+            Text("$_savedData",textAlign: TextAlign.center,)
           ],
         ),
       ),
     );
-  }
-}
-
-Future<String> get _localPath async {
-  final directory = await getApplicationDocumentsDirectory();
-  return directory.path;
-}
-
-Future<File> get _localFile async {
-  final path = await _localPath;
-  return File('$path/manik.txt');
-}
-
-Future<File> writeData(String msg) async {
-  final file = await _localFile;
-  return file.writeAsString("$msg");
-}
-
-Future<String> readData() async {
-  try {
-    final file = await _localFile;
-    String msg = await file.readAsString();
-    return msg;
-  } catch (e) {
-    return "No Data";
   }
 }
