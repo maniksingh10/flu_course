@@ -140,9 +140,17 @@ class _WeatherAppState extends State<WeatherApp> {
                   )
                 ],
               );
+            } else {
+              return Container(
+                width: 0.0,
+                height: 0.0,
+              );
             }
           } else {
-            return Container();
+            return Container(
+              width: 0.0,
+              height: 0.0,
+            );
           }
         });
   }
